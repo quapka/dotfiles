@@ -21,7 +21,7 @@ autocmd BufWinLeave * call clearmatches()
 
 " playing with higlightning tabs
 set list
-set listchars=tab:>\ 
+set listchars=tab:>·
 "hi GroupA ctermbg=blue ctermfg=black
 "hi GroupB ctermbg=gray ctermfg=black
 "match GroupA / \+$/
