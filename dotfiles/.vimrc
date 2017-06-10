@@ -1,6 +1,7 @@
 " tabchar 4 spaces long
 set tabstop=4
 syntax enable
+set expandtab
 set splitright " new window open on the right
 imap jk <Esc> " goes to Esc mode on pressing j and k
 nnoremap <silent> <F8> :w<cr>!clear;python %<cr>" run python file
@@ -35,9 +36,10 @@ set number
 set relativenumber
 
 " automatic highlightning for shpaml files
-" maybe better to be put somewhere else - different file
+" maybe better to be put in different file
 autocmd BufRead,BufNewFile *.shpaml setfiletype htmldjango
 
+""" BLOCK
 " https://pastebin.com/f2ee37c92
 " searching for dup lines
 " * and # search for next/previous of selected text when used in visual mode
@@ -49,7 +51,9 @@ fun! s:VisualSearch()
   let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
   let @" = old
 endf
+""" ENDBLOCK
 
+""" BLOCK
 " kudos to https://unix.stackexchange.com/a/104931
 " %F(Full file path)
 " %m(Shows + if modified - if not modifiable)
@@ -69,3 +73,4 @@ hi statusline ctermbg=white ctermfg=black
 
 " Make sure it always shows
 set laststatus=2
+""" ENDBLOCK
