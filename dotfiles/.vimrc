@@ -29,6 +29,15 @@ set listchars=tab:>·
 hi TabularSpace ctermfg=201 ctermbg=0
 match TabularSpace /\t/
 		"something
+highlight WhiteSpaceBol ctermbg=blue ctermfg=red
+match WhiteSpaceBol /^ \+/
+
+" highlight leading spaces
+"set listchars=space:·
+"highlight WhiteSpaceMol ctermbg=black ctermfg=black
+"match WhiteSpaceMol /\ /
+"highlight WhiteSpaceBol ctermbg=blue ctermfg=red
+"match WhiteSpaceBol /^ \+/
 
 " line numbers and stuff
 set number
