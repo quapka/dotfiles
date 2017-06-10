@@ -1,7 +1,7 @@
 " tabchar 4 spaces long
 set tabstop=4
 syntax enable
-set expandtab
+" set expandtab " probably better not to use this feature
 set splitright " new window open on the right
 imap jk <Esc> " goes to Esc mode on pressing j and k
 nnoremap <silent> <F8> :w<cr>!clear;python %<cr>" run python file
