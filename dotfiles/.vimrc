@@ -1,4 +1,4 @@
-" tabchar 4 spaces long
+" tabchar 5 spaces long
 set tabstop=4
 syntax enable
 " set expandtab " probably better not to use this feature
@@ -30,18 +30,19 @@ set listchars=tab:>·
 hi TabularSpace ctermfg=201 ctermbg=0
 match TabularSpace /\t/
 		"something
-highlight WhiteSpaceBol ctermbg=blue ctermfg=red
-match WhiteSpaceBol /^ \+/
+"highlight LeadingWhiteSpace ctermbg=blue ctermfg=red
+"match LeadingWhiteSpace /^ \+/
 
 " highlight leading spaces
 "set listchars=space:·
 "highlight WhiteSpaceMol ctermbg=black ctermfg=black
 "match WhiteSpaceMol /\ /
-"highlight WhiteSpaceBol ctermbg=blue ctermfg=red
-"match WhiteSpaceBol /^ \+/
+highlight LeadingWhiteSpace ctermbg=blue ctermfg=red
+match LeadingWhiteSpace /^ \+/
 
-" line numbers and stuff
+" view absolute line numbers
 set number
+" view relative line numbers up/down based on cursor position
 set relativenumber
 
 " automatic highlightning for shpaml files
@@ -83,3 +84,17 @@ hi statusline ctermbg=white ctermfg=black
 " Make sure it always shows
 set laststatus=2
 """ ENDBLOCK
+
+""" source vundle
+so ~/git/dotfiles/.vundle_conf.vim
+
+"map switching between tabs
+map <F7> :tabp<CR>
+map <F8> :tabn<CR>
+
+" display current time
+map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+
+" automatic reload of changes in .vimrc upon saving
+" https://superuser.com/questions/132029/how-do-you-reload-your-vimrc-file-without-restarting-vim
+" here
