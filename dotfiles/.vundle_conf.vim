@@ -48,3 +48,7 @@ Plugin 'easymotion/vim-easymotion'
 " help: hl-Pmenu
 " adjust the colors in the future
 Plugin 'valloric/youcompleteme'
+" commentary
+Plugin 'tpope/vim-commentary'
+" Plugin 'scrooloose/syntastic'
+

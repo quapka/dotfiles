@@ -86,7 +86,7 @@ set laststatus=2
 """ ENDBLOCK
 
 """ source vundle
-so ~/git/dotfiles/.vundle_conf.vim
+so ~/.vundle_conf.vim
 
 "map switching between tabs
 map <F7> :tabp<CR>
@@ -98,3 +98,7 @@ map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 " automatic reload of changes in .vimrc upon saving
 " https://superuser.com/questions/132029/how-do-you-reload-your-vimrc-file-without-restarting-vim
 " here
+
+" colorschema for windows tabs
+" https://stackoverflow.com/questions/7238113/customising-the-colours-of-vims-tab-bar
+hi TabLineSel ctermbg=blue
