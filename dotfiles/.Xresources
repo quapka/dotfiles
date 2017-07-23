@@ -1,0 +1,4 @@
+xterm*faceName: DejavVu Sans Mono Book
+xterm*faceSize: 11
+
+xterm*loginshell: true
