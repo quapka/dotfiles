@@ -4,44 +4,49 @@ so ~/.vundle_conf.vim
 " so ~/.syntax.vim
 set tags=./._tags;
 
-" function UpdateTags()
-"     let touce gfile = system('update-tags')
-"     echo "Updated tags"
-" endfunction
+function! UpdateTags()
+    let tagfile = system('update-tags')
+    echo "Updated tags"
+endfunction
 
-" function UpdateAllTags()
-"     let tagfile = system('update-tags --all')
-"     echo "Updated all tags"
-" endfunction
+function! UpdateAllTags()
+    let tagfile = system('update-tags --all')
+    echo "Updated all tags"
+endfunction
+
+" highlightning files
+" filetype plugin on
 
 " indentation
 " set tabstop=4
 set expandtab
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 
-set splitright " new window open on the right
+set splitright " open new window on the right v-split
+set splitbelow " open new window below when h-split
 
 " go to Esc mode on pressing j and k
 imap jk <Esc>
+" and in neovim terminal mode as well
+tnoremap <Esc> <C-\><C-n>
+tnoremap jk <C-\><C-n>
 " nnoremap <silent> <F8> :w<cr>!clear;python %<cr>" run python file
 nnoremap <C-Left> :tabprevious<cr>
 nnoremap <C-Right> :tabnext<cr>
 
 " window minimal height
+" set wh=23
 set wmh=0
-" moving between splits
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
+" moving between splits, there is also <C-W>_
+map <C-J> <C-W>j
+map <C-K> <C-W>k
 
 " window minimal width
 set wmw=0
 " moving between splits
-map <C-H> <C-W>h<C-W>_
-map <C-L> <C-W>l<C-W>_
-
-" highlightning files
-"filetype on
+map <C-H> <C-W>h
+map <C-L> <C-W>l
 
 " match extra white space
 highlight ExtraWhitespace ctermbg=blue guibg=blue
@@ -80,6 +85,7 @@ set relativenumber
 " automatic highlightning for shpaml files
 " maybe better to be put in different file
 autocmd BufRead,BufNewFile *.shpaml setfiletype htmldjango
+autocmd FileType htmldjango setlocal commentstring=\{#\ %s\ #\}
 
 """ BLOCK
 " https://pastebin.com/f2ee37c92
@@ -134,11 +140,44 @@ map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 " hi TabLineSel ctermbg=blue
 "
 " python and neovim
-let g:loaded_python_provider=1
-let g:loaded_python3_provider=1
+" let g:loaded_python_provider=1
+" let g:loaded_python3_provider=1
 
-" " python specific 
-" if filetype == "py"
-"   set colorcolumn=80
-"   highlight ColorColumn ctermbg=darkgray
-" endif
+" setting breakpoints with <leader>b <leader>B
+au FileType python map <silent> <leader>b oimport pudb; pudb.set_trace()<esc>
+au FileType python map <silent> <leader>B Oimport pudb; pudb.set_trace()<esc>
+
+autocmd BufRead,BufNewFile *.python setlocal filetype=python
+
+" vim-close tags
+" filenames like *.xml, *.html, *.xhtml, ...
+" Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.shpaml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non closing tags self closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" integer value [0|1]
+" This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is '<leader>>'
+"
+let g:closetag_close_shortcut = '<leader>>'
+
+" vim test
+nmap <silent> <leader>t :TestNearest<CR>
+let test#python#runner = 'djangotest'
+let test#strategy = "neovim"
+" special runner for fabric
+
+" First letter of runner's name must be uppercase
+let test#runners = {'Python': ['FabRunner']}

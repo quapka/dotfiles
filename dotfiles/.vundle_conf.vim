@@ -16,11 +16,14 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-commentary'
 " Plugin 'scrooloose/syntastic'
 Plugin 'mhartington/oceanic-next'
+" Plugin 'w0rp/ale'
 " Plugin 'klen/python-mode'
 " Plugin 'valloric/youcompleteme'
-
+Plugin 'kchmck/vim-coffee-script'
 " Plugin 'bling/vim-airline'
 " Plugin 'vim-airline/vim-airline-themes'
+Plugin 'alvan/vim-closetag'
+Plugin 'janko-m/vim-test'
 
 
 " Visual plugins
