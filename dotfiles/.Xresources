@@ -1,4 +1,34 @@
-/* xterm*faceName: DejavVu Sans Mono Book */
-/* xterm*faceSize: 11 */
+xterm*faceName:DejavVuSansMonoBook
+/* xtermfaceSize:11 */
 
-/* xterm*loginshell: true */
+/* xtermloginshell:true */
+XTerm*background: black
+XTerm*Foreground: Grey
+
+/* XTerm*faceName: Liberation Mono */
+XTerm*faceSize: 10
+
+XTerm*on2Clicks: regex [^  \n]+
+
+XTerm*bellIsUrgent: true
+
+! Make the terminal 127 by 42 characters in size
+XTerm*geometry: 127x44+64+0
+
+! By default, XTerm composes special chars with META. With this setting I can work my readline magic instead.
+XTerm*metaSendsEscape: true
+
+! Bracketed paste mode requires the allowWindowOps resource to be true 
+XTerm*allowWindowOps: true
+
+XTerm*saveLines: 1000
+
+! Don't jump to the bottom when there's output
+XTerm*VT100*scrollTtyOutput: false
+
+XTerm*VT100.Translations: #override \
+    ShiftInsert: insert-selection(CLIPBOARD) \n\
+    Insert: insert-selection(PRIMARY) \n\
+    Shift: insert-selection(CLIPBOARD) \n\
+    ShiftUp: scroll-back(1) \n\
+    ShiftDown: scroll-forw(1)
