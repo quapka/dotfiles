@@ -225,6 +225,20 @@ awful.screen.connect_for_each_screen(function(s)
     }
 end)
 -- }}}
+-- Keyboard map indicator and changer
+kbdcfg = {}
+kbdcfg.cmd = "setxkbmap"
+kbdcfg.layout = { { "us", "" }, { "cz", "" } }
+kbdcfg.current = 2  -- cz is our default layout
+kbdcfg.widget = wibox.widget.textbox()
+kbdcfg.widget:set_text(" " .. kbdcfg.layout[kbdcfg.current][1] .. " ")
+kbdcfg.switch = function ()
+  kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+  local t = kbdcfg.layout[kbdcfg.current]
+  kbdcfg.widget:set_text(" " .. t[1] .. " ")
+  os.execute( kbdcfg.cmd .. " -layout " .. t[1] .. " -option " .. t[2] )
+  print('Changing keys')
+end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
@@ -364,7 +378,8 @@ clientkeys = awful.util.table.join(
             c.maximized = not c.maximized
             c:raise()
         end ,
-        {description = "maximize", group = "client"})
+        {description = "maximize", group = "client"}),
+    awful.key({ "Shift" }, "#64", function () kbdcfg.switch() end)
 )
 
 -- Bind all key numbers to tags.
