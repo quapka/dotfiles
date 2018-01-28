@@ -44,8 +44,8 @@ end
 beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
-editor = os.getenv("EDITOR") or "editor"
+terminal = "xterm"
+editor = os.getenv("EDITOR") or "neovim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -379,7 +379,7 @@ clientkeys = awful.util.table.join(
             c:raise()
         end ,
         {description = "maximize", group = "client"}),
-    awful.key({ "Shift" }, "#64", function () kbdcfg.switch() end)
+    awful.key({ "Shift" }, "#64", kbdcfg.switch)
 )
 
 -- Bind all key numbers to tags.
@@ -563,6 +563,3 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 --
-
-terminal = 'xterm'
-editor = os.getenv('EDITOR') or 'neovim'
