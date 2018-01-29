@@ -379,7 +379,11 @@ clientkeys = awful.util.table.join(
             c:raise()
         end ,
         {description = "maximize", group = "client"}),
-    awful.key({ "Shift" }, "#64", kbdcfg.switch)
+    awful.key({ "Shift" }, "#64", kbdcfg.switch),
+    awful.key({ modkey, }, "l",
+        function()
+            awful.util.spawn('xscreensaver-command --lock')
+        end)
 )
 
 -- Bind all key numbers to tags.
