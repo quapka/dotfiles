@@ -329,7 +329,10 @@ globalkeys = awful.util.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
-
+    awful.key({ modkey, "Control" }, "l",
+        function()
+            awful.util.spawn('xscreensaver-command --lock')
+        end),
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
@@ -379,11 +382,7 @@ clientkeys = awful.util.table.join(
             c:raise()
         end ,
         {description = "maximize", group = "client"}),
-    awful.key({ "Shift" }, "#64", kbdcfg.switch),
-    awful.key({ modkey, }, "l",
-        function()
-            awful.util.spawn('xscreensaver-command --lock')
-        end)
+    awful.key({ "Shift" }, "#64", kbdcfg.switch)
 )
 
 -- Bind all key numbers to tags.
@@ -567,3 +566,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 --
+awful.util.spawn_with_shell("xscreensaver -no-splash")
