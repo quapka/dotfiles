@@ -1,5 +1,6 @@
+set runtimepath+=~/.nvim/after
 " source vundle
-so ~/.vundle_conf.vim
+source ~/.vundle_conf.vim
 " colors and syntax highlight
 " so ~/.syntax.vim
 set tags=./._tags;
@@ -22,6 +23,8 @@ endfunction
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+" enable mouse
+set mouse=a
 
 set splitright " open new window on the right v-split
 set splitbelow " open new window below when h-split
@@ -173,11 +176,31 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
-" vim test
-nmap <silent> <leader>t :TestNearest<CR>
-let test#python#runner = 'djangotest'
-let test#strategy = "neovim"
-" special runner for fabric
+" neomake settings
+" When writing a buffer.
+" call neomake#configure#automake('w')
+" When writing a buffer, and on normal mode changes (after 750ms).
+" call neomake#configure#automake('nw', 751)
+"
+call neomake#configure#automake({
+\   'TextChanged': {},
+\   'InsertLeave': {},
+\   'BufWinEnter': {'delay': 0},
+\ }, 500)
 
-" First letter of runner's name must be uppercase
-let test#runners = {'Python': ['FabRunner']}
+highlight NeomakeWarningSign ctermfg=11
+highlight NeomakeWarning ctermfg=11
+let g:neomake_warning_sign={'text': '!', 'texthl': 'NeomakeWarningSign'}
+
+let g:neomake_python_enabled_makers = ['pylint']
+" When reading a buffer (after 2s), and when writing.
+" call neomake#configure#automake('rw', 1000)
+
+" vim-airline settings
+autocmd User AirlineToggledOn call SetStatus()
+function! SetStatus()
+    if ( &ft == 'py' || &ft == 'python')
+        set colorcolumn=10
+        " let g:airline_section_x = 'something'
+    endif
+endfunction
