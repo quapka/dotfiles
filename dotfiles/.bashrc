@@ -56,10 +56,36 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+git_branch(){
+    git_dir=$(git rev-parse --git-dir 2>/dev/null)
+    is_git_dir=$?
+    if [ $is_git_dir -eq 0 ]; then
+        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+        has_branch=$?
+        if [ $has_branch -eq 0 ]; then
+            echo " [$branch]"
+        else
+            echo " [.git]"
+        fi
+    else
+        echo ""
+    fi
+}
+
+virtual_activate(){
+    if [ -d "virtual" ]; then
+        . virtual/bin/activate
+        if [ $? -eq 0 ]; then
+            echo "(virtual) "
+        fi
+    fi
+    echo ""
+}
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(git_branch)\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(git_branch)\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -115,3 +141,33 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+function go_to_last_work_dir {
+    last_work_dir_file=/home/qup/.config/last-work-dir
+    if [ -f "$last_work_dir_file" ]; then
+        possible_path="$(head -n 1 $last_work_dir_file)"
+        if [ -d "$possible_path" ]; then
+            echo "$possible_path"
+        else
+            echo /home/qup/projects
+        fi
+    fi
+}
+
+# conversion from hex to decimal
+function dec {
+    if [ -z $1 ]; then
+        echo "Please, provide a hex number"
+    else
+        printf "HEX: $1 DECIMAL: %d\n" "0x$1"
+    fi
+}
+
+# # conversion from decimal to hex
+function hex {
+    if [ -z $1 ]; then
+        echo "Please, provide a decimal number"
+    else
+        printf "DECIMAL: $1 HEX: %x\n" "$1"
+    fi
+}

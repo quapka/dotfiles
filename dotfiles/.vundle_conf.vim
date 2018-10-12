@@ -26,14 +26,15 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'bling/vim-airline'
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'alvan/vim-closetag'
+Plugin 'altercation/vim-colors-solarized'
+
 Plugin 'janko-m/vim-test'
 " vim-test
 nmap <silent> <leader>t :TestNearest<CR>
-" First letter of runner's name must be uppercase
-let test#runners = {'Python': ['FabRunner']}
-let test#python#runner = 'fabrunner'
-let test#strategy = "neovim"
-
+" " First letter of runner's name must be uppercase
+" let test#runners = {'Python': ['FabRunner']}
+" let test#python#runner = 'fabrunner'
+" let test#strategy = "neovim"
 
 " Visual plugins
 " Plugin 'bling/vim-airline'

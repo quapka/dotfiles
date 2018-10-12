@@ -15,6 +15,11 @@ function! UpdateAllTags()
     echo "Updated all tags"
 endfunction
 
+
+" syntax enable
+" set background=dark
+" colorscheme solarized
+
 " highlightning files
 " filetype plugin on
 
@@ -24,7 +29,7 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 " enable mouse
-set mouse=a
+" set mouse=a
 
 set splitright " open new window on the right v-split
 set splitbelow " open new window below when h-split

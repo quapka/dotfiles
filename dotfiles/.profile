@@ -23,4 +23,4 @@ fi
 
 # custom
 # set EDITOR
-EDITOR=/usr/bin/nvim
+export EDITOR=/usr/bin/nvim
