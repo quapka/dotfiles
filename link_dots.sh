@@ -8,7 +8,8 @@ fi
 
 # kudos to url: https://stackoverflow.com/a/246128/2377489
 dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-backup="./backup"
+LOCAL_BACKUP="./backup"
+CONFIG_DIR="$HOME/.config"
 
 for dfile in .bashrc .vimrc .vundle_conf.vim .bash_aliases .profile .Xresources .tmux.conf; do
     # TODO make this logic into a function, that just accepts some paths,
@@ -19,15 +20,15 @@ for dfile in .bashrc .vimrc .vundle_conf.vim .bash_aliases .profile .Xresources 
     existing_dotfile="$HOME/$dfile"
     if [ -e "$existing_dotfile" ]; then
         echo "The file $existing_dotfile already exists."
-        read -p "Would you like to overwrite it (it will be saved in ./backup) [y/n]?" -n 1 -r
+        read -p "Would you like to overwrite it (it will be saved in $LOCAL_BACKUP) [y/n]?" -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             force="--force"
-            if [ ! -d "$backup" ]; then
-                mkdir "$backup"
+            if [ ! -d "$LOCAL_BACKUP" ]; then
+                mkdir "$LOCAL_BACKUP"
             fi
-            echo "Copying $existing_dotfile to $backup"
-            cp "$existing_dotfile" "$backup/$dfile.$( date +"%Y%m%d-%H%M-%S")"
+            echo "Copying $existing_dotfile to $LOCAL_BACKUP"
+            cp "$existing_dotfile" "$LOCAL_BACKUP/$dfile.$( date +"%Y%m%d-%H%M-%S")"
         else
             echo "Skipping $existing_dotfile"
             continue
@@ -43,8 +44,10 @@ for dfile in .bashrc .vimrc .vundle_conf.vim .bash_aliases .profile .Xresources 
     echo
 done
 
+
+
 echo "Trying to create a link for rc.lua:"
-AWESOMEWM_DIR="$HOME/.config/awesome/"
+AWESOMEWM_DIR="$CONFIG_DIR/awesome/"
 if [ ! -d "$AWESOMEWM_DIR" ]; then
     echo "$AWESOMEWM_DIR does not exist. Creating it now.."
     mkdir -p "$AWESOMEWM_DIR"
