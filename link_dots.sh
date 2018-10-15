@@ -21,7 +21,12 @@ for dfile in .bashrc .vimrc .vundle_conf.vim .bash_aliases .profile .Xresources 
 done
 
 echo "Trying to create a link for rc.lua:"
-ln -s "$dotfiles/rc.lua" "$HOME/.config/awesome/"
+AWESOMEWM_DIR="$HOME/.config/awesome/"
+if [ ! -d "$AWESOMEWM_DIR" ]; then
+    echo "$AWESOMEWM_DIR does not exist. Creating it now.."
+    mkdir -p "$AWESOMEWM_DIR"
+fi
+ln -s "$dotfiles/rc.lua" "$AWESOMEWM_DIR"
 if [ $? -eq "0" ]; then
     echo "OK"
 else
