@@ -7,7 +7,9 @@ else
 	exit 1
 fi
 
-# not a perfect way, but rather usable for now, for other ways check
-# url: https://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
-dotfiles="$(dirname $0)"
-ln -s "$dotfiles/.bashrc" "$dir"
+# kudos to url: https://stackoverflow.com/a/246128/2377489
+dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+echo "$dotfiles"
+for dfile in .bashrc .vimrc .vundle_conf.vim .bash_aliases .profile .Xresources .tmux.conf; do
+	ln -s "$dotfiles/$dfile" "$dir"
+done
