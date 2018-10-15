@@ -58,3 +58,16 @@ if [ $? -eq "0" ]; then
 else
     echo "ERROR"
 fi
+
+which nvim
+if [ $? -eq "0" ]; then
+    echo "Located nvim is installed. Trying to link it as well."
+    NVIM_DIR="$CONFIG_DIR/nvim/"
+    if [ ! -d "$NVIM_DIR" ]; then
+        echo "Creating the directory for nvim config."
+        mkdir -p "$NVIM_DIR"
+    fi
+    ln --symbolic "$HOME/.vimrc" "$NVIM_DIR/init.vim"
+fi
+
+echo "Trying to link neovim settings"
