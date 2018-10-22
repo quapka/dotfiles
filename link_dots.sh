@@ -10,8 +10,9 @@ fi
 dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 LOCAL_BACKUP="./backup"
 CONFIG_DIR="$HOME/.config"
+HOME_DOTFILES=('.bashrc' '.vimrc' '.vundle_conf.vim' '.bash_aliases' '.profile' '.Xresources' '.tmux.conf')
 
-for dfile in .bashrc .vimrc .vundle_conf.vim .bash_aliases .profile .Xresources .tmux.conf; do
+for dfile in "${HOME_DOTFILES[@]}" ; do
     # TODO make this logic into a function, that just accepts some paths,
     # because it needs to be used for rc.lua as well.
     echo "Trying to create a link for $dfile:"
