@@ -11,6 +11,13 @@ dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 LOCAL_BACKUP="./backup"
 CONFIG_DIR="$HOME/.config"
 HOME_DOTFILES=('.bashrc' '.vimrc' '.vundle_conf.vim' '.bash_aliases' '.profile' '.Xresources' '.tmux.conf')
+zshFile=".zshrc"
+if [[ $SHELL == */zsh ]]; then
+    echo "ZSH usage detected. File $zshFile can be linked as well."
+    HOME_DOTFILES+=("$zshFile")
+else
+    echo "Looks like ZSH is not used. Won't attempt to link $zshFile."
+fi
 
 for dfile in "${HOME_DOTFILES[@]}" ; do
     # TODO make this logic into a function, that just accepts some paths,
