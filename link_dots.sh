@@ -10,7 +10,16 @@ fi
 dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 LOCAL_BACKUP="./backup"
 CONFIG_DIR="$HOME/.config"
-HOME_DOTFILES=('.bashrc' '.vimrc' '.vundle_conf.vim' '.bash_aliases' '.profile' '.Xresources' '.tmux.conf')
+HOME_DOTFILES=('.bashrc' '.vimrc' '.vundle_conf.vim' '.bash_aliases' '.profile' '.Xresources')
+
+tmuxFile=".tmux.conf"
+tmuxVer="$(tmux -V)"
+if [[ $tmuxVer == tmux* ]]; then
+    echo "TMUX detected. File $tmuxFile can be linked as well."
+    HOME_DOTFILES+=("$tmuxFile")
+else
+    echo "Looks like TMUX is not installed. Won't attempt to link $tmuxFile."
+fi
 zshFile=".zshrc"
 if [[ $SHELL == */zsh ]]; then
     echo "ZSH usage detected. File $zshFile can be linked as well."
