@@ -5,6 +5,8 @@ alias ffdm='source ~/Development/Python/envs/ffdm/bin/activate'
 alias dyno='source ~/projects/dyno/virtual/bin/activate'
 alias p2django='source ~/Development/Python/envs/p2django/bin/activate'
 alias p3django='source ~/Development/Python/envs/p3django/bin/activate'
+alias vim='/usr/bin/nvim'
+alias oldvim='/usr/bin/vim'
 # clear shortcut
 alias cl=clear
 
