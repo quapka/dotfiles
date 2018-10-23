@@ -12,3 +12,5 @@ alias cl=clear
 
 # dotfiles
 alias dots="cd ~/projects/dotfiles/dotfiles && ls -a"
+# source https://stackoverflow.com/a/34432985/2377489
+type nvim >/dev/null 2>&1 && alias vim="$(which nvim)"
