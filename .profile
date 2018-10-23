@@ -24,3 +24,9 @@ fi
 # custom
 # set EDITOR
 EDITOR=/usr/bin/nvim
+# load custom settings - some are machine dependent
+# for example change the order of the displays
+CUSTOMRC="$HOME/.customrc"
+if [ -f "$CUSTOMRC" ]; then
+    . "$CUSTOMRC"
+fi
