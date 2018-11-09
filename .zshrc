@@ -99,3 +99,21 @@ source $ZSH/oh-my-zsh.sh
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# conversion from hex to decimal
+function dec {
+    if [ -z $1 ]; then
+        echo "Please, provide a hex number"
+    else
+        printf "HEX: $1 DECIMAL: %d\n" "0x$1"
+    fi
+}
+
+# # conversion from decimal to hex
+function hex {
+    if [ -z $1 ]; then
+        echo "Please, provide a decimal number"
+    else
+        printf "DECIMAL: $1 HEX: %x\n" "$1"
+    fi
+}
