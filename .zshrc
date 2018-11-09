@@ -117,3 +117,7 @@ function hex {
         printf "DECIMAL: $1 HEX: %x\n" "$1"
     fi
 }
+custom_definitions=~/projects/dotfiles/.custom
+if [ -f "$custom_definitions" ]; then
+    source "$custom_definitions"
+fi
