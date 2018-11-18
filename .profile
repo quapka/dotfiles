@@ -30,3 +30,5 @@ CUSTOMRC="$HOME/.customrc"
 if [ -f "$CUSTOMRC" ]; then
     . "$CUSTOMRC"
 fi
+
+export PATH="$PATH":$HOME/netbeans-8.2/bin/netbeans
