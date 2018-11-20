@@ -121,3 +121,27 @@ custom_definitions=~/projects/dotfiles/.custom
 if [ -f "$custom_definitions" ]; then
     source "$custom_definitions"
 fi
+
+# source: https://dougblack.io/words/zsh-vi-mode.html
+# and: https://superuser.com/questions/351499/how-to-switch-comfortably-to-vi-command-mode-on-the-zsh-command-line
+# use vim integration with zs
+# emacs integration is -e
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+    zle reset-prompt
+}
+
+bindkey -M viins 'jk' vi-cmd-mode
+zle -N zle-line-init
+zle -N zle-keymap-select
+# export KEYTIMEOUT=8
