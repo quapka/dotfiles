@@ -331,6 +331,7 @@ globalkeys = awful.util.table.join(
               {description = "restore minimized", group = "client"}),
     awful.key({ modkey, "Control" }, "l",
         function()
+            awful.util.spawn('setxkbmap us')
             awful.util.spawn('xscreensaver-command --lock')
         end),
     -- Prompt
