@@ -147,4 +147,7 @@ fi
 # export KEYTIMEOUT=8
 # bye CAPSLOCK
 setxkbmap -option ctrl:nocaps
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# change the speed of trackpoint
+xinput --set-prop "12" "libinput Accel Speed" -0.5
