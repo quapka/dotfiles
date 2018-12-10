@@ -147,3 +147,4 @@ fi
 # export KEYTIMEOUT=8
 # bye CAPSLOCK
 setxkbmap -option ctrl:nocaps
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

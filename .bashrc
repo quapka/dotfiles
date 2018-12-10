@@ -171,3 +171,5 @@ function hex {
         printf "DECIMAL: $1 HEX: %x\n" "$1"
     fi
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
