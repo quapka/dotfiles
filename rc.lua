@@ -236,7 +236,7 @@ kbdcfg.switch = function ()
   kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
   local t = kbdcfg.layout[kbdcfg.current]
   kbdcfg.widget:set_text(" " .. t[1] .. " ")
-  os.execute( kbdcfg.cmd .. " -layout " .. t[1] .. " -option " .. t[2] )
+  os.execute( kbdcfg.cmd .. " -layout " .. t[1] .. " -option " .. t[2] .." -option ctrl:nocaps" )
   print('Changing keys')
 end
 

@@ -146,5 +146,4 @@ fi
 # zle -N zle-keymap-select
 # export KEYTIMEOUT=8
 # bye CAPSLOCK
-setxkbmap -layout us -option ctrl:nocaps
-setxkbmap -layout cz -option ctrl:nocaps
+setxkbmap -option ctrl:nocaps
