@@ -52,3 +52,4 @@ XTerm.VT100.color4:             CornflowerBlue
 /* XTerm.VT100.colorULMode:        true */
 /* XTerm.VT100.cursorColor:        White */
 /* XTerm.VT100.foreground:         White */
+#include ".Xresources.d/local"
