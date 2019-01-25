@@ -15,6 +15,9 @@ function! UpdateAllTags()
     echo "Updated all tags"
 endfunction
 
+set encoding=utf-8 " the encoding displayed
+set fileencoding=utf-8 " the encoding written to file
+
 
 " syntax enable
 " set background=dark

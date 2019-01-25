@@ -236,7 +236,7 @@ kbdcfg.switch = function ()
   kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
   local t = kbdcfg.layout[kbdcfg.current]
   kbdcfg.widget:set_text(" " .. t[1] .. " ")
-  os.execute( kbdcfg.cmd .. " -layout " .. t[1] .. " -option " .. t[2] )
+  os.execute( kbdcfg.cmd .. " -layout " .. t[1] .. " -option " .. t[2] .." -option ctrl:nocaps" )
   print('Changing keys')
 end
 
@@ -331,6 +331,7 @@ globalkeys = awful.util.table.join(
               {description = "restore minimized", group = "client"}),
     awful.key({ modkey, "Control" }, "l",
         function()
+            awful.util.spawn('setxkbmap us')
             awful.util.spawn('xscreensaver-command --lock')
         end),
     -- Prompt
@@ -568,3 +569,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --
 awful.util.spawn_with_shell("xscreensaver -no-splash")
 awful.util.spawn("xset r rate 220 80")
+awful.util.spawn("nm-applet")
