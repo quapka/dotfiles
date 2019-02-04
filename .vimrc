@@ -212,3 +212,7 @@ function! SetStatus()
         " let g:airline_section_x = 'something'
     endif
 endfunction
+
+" direnv uses .envrc files
+autocmd BufRead,BufNewFile .envrc setlocal filetype=sh
+autocmd BufRead,BufNewFile .envrc setlocal syntax=sh
