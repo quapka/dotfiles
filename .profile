@@ -32,6 +32,5 @@ if [ -f "$CUSTOMRC" ]; then
 fi
 
 export PATH="$PATH":$HOME/netbeans-8.2/bin/
-export PATH="$PATH":/usr/local/go/bin
 # start ssh agent
 eval $(ssh-agent -s)
