@@ -10,7 +10,7 @@ fi
 dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 LOCAL_BACKUP="./backup"
 CONFIG_DIR="$HOME/.config"
-HOME_DOTFILES=('.bashrc' '.vimrc' '.vundle_conf.vim' '.bash_aliases' '.profile' '.Xresources')
+HOME_DOTFILES=('.bashrc' '.vimrc' '.vundle_conf.vim' '.bash_aliases' '.profile' '.Xresources' '.zsh_funcs')
 
 tmuxFile=".tmux.conf"
 tmuxVer="$(tmux -V)"

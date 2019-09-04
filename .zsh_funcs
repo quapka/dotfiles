@@ -1,0 +1,11 @@
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+NOCOLOR="\033[0m"
+
+function green() {
+    echo "$GREEN$1$NOCOLOR"
+}
+
+function red() {
+    echo "$RED$1$NOCOLOR"
+}
