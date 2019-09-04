@@ -154,3 +154,6 @@ setxkbmap -option ctrl:nocaps
 # change the speed of trackpoint
 xinput --set-prop "12" "libinput Accel Speed" -0.5
 export SOFTHSM2_CONF="$HOME/go/src/github.com/quapka/go-analysis/hsm-tokens/softhsm2.conf"
+
+# path to GlobalPlatform executable
+export GP_PATH="$HOME/projects/fi/crocs/GlobalPlatformPro/gp.jar"
