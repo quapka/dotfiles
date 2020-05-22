@@ -3,6 +3,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$PATH":/usr/local/go/bin
 export PATH="$PATH":"$HOME/go/bin"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/projects/fi/thesis/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -79,11 +80,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -158,3 +159,11 @@ export SOFTHSM2_CONF="$HOME/go/src/github.com/quapka/go-analysis/hsm-tokens/soft
 
 # path to GlobalPlatform executable
 export GP_PATH="$HOME/projects/fi/crocs/GlobalPlatformPro/gp.jar"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+export RBENV_VERSION="2.5.6"
+eval "$(rbenv init -)"
+
+eval "$(pipenv --completion)"
+
+eval "$(direnv hook zsh)"
