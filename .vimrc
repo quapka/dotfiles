@@ -5,16 +5,6 @@ source ~/.vundle_conf.vim
 " so ~/.syntax.vim
 set tags=./._tags;
 
-function! UpdateTags()
-    let tagfile = system('update-tags')
-    echo "Updated tags"
-endfunction
-
-function! UpdateAllTags()
-    let tagfile = system('update-tags --all')
-    echo "Updated all tags"
-endfunction
-
 set encoding=utf-8 " the encoding displayed
 set fileencoding=utf-8 " the encoding written to file
 
@@ -33,6 +23,10 @@ set shiftwidth=4
 set softtabstop=4
 " enable mouse
 set mouse=a
+
+filetype indent on
+set smartindent
+autocmd BufRead,BufWritePre *.dot normal gg=G
 
 set splitright " open new window on the right v-split
 set splitbelow " open new window below when h-split
@@ -66,18 +60,18 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+a$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-" EXAMPLE extra white space		
+" EXAMPLE extra white space
 
 " playing with higlightning tabs
-set list
-set listchars=tab:>·
+" set list
+" set listchars=tab:>·
 "hi GroupA ctermbg=blue ctermfg=black
 "hi GroupB ctermbg=gray ctermfg=black
 "match GroupA / \+$/
 "match GroupB /\t/
-hi TabularSpace ctermfg=201 ctermbg=0
-match TabularSpace /\t/
-		"something
+" hi TabularSpace ctermfg=201 ctermbg=0
+" match TabularSpace /\t/
+"something
 "highlight LeadingWhiteSpace ctermbg=blue ctermfg=red
 "match LeadingWhiteSpace /^ \+/
 
@@ -106,9 +100,9 @@ xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
 xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
 
 fun! s:VisualSearch()
-  let old = @" | norm! gvy
-  let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
-  let @" = old
+    let old = @" | norm! gvy
+    let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
+    let @" = old
 endf
 """ ENDBLOCK
 
@@ -159,6 +153,7 @@ au FileType python map <silent> <leader>b oimport pudb; pudb.set_trace()<esc>
 au FileType python map <silent> <leader>B Oimport pudb; pudb.set_trace()<esc>
 
 autocmd BufRead,BufNewFile *.python setlocal filetype=python
+autocmd BufRead,BufNewFile *.py setfiletype python
 
 " vim-close tags
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -184,23 +179,35 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
-" neomake settings
-" When writing a buffer.
-" call neomake#configure#automake('w')
-" When writing a buffer, and on normal mode changes (after 750ms).
-" call neomake#configure#automake('nw', 751)
-"
+" When writing a buffer (no delay).
+call neomake#configure#automake('w')
+" " When writing a buffer (no delay), and on normal mode changes (after 750ms).
+" call neomake#configure#automake('nw', 750)
+" " When reading a buffer (after 1s), and when writing (no delay).
+" call neomake#configure#automake('rw', 1000)
+" " Full config: when writing or reading a buffer, and on changes in insert and
+" " normal mode (after 500ms; no delay when writing).
+" call neomake#configure#automake('nrwi', 500)
+
 call neomake#configure#automake({
-\   'TextChanged': {},
-\   'InsertLeave': {},
-\   'BufWinEnter': {'delay': 0},
-\ }, 500)
+            \   'TextChanged': {},
+            \   'InsertLeave': {},
+            \   'BufWinEnter': {'delay': 0},
+            \ }, 500)
 
 highlight NeomakeWarningSign ctermfg=11
 highlight NeomakeWarning ctermfg=11
 let g:neomake_warning_sign={'text': '!', 'texthl': 'NeomakeWarningSign'}
 
-let g:neomake_python_enabled_makers = ['pylint']
+let g:neomake_python_flake8_maker = {
+    \ 'args': ['--max-line-length=88'],
+    \ }
+    " \ 'errorformat':
+    "     \ '%E%f:%l: could not compile,%-Z%p^,' .
+    "     \ '%A%f:%l:%c: %t%n %m,' .
+    "     \ '%A%f:%l: %t%n %m,' .
+    "     \ '%-G%.%#',
+let g:neomake_python_enabled_makers = ['flake8']
 " When reading a buffer (after 2s), and when writing.
 " call neomake#configure#automake('rw', 1000)
 
@@ -216,3 +223,48 @@ endfunction
 " direnv uses .envrc files
 autocmd BufRead,BufNewFile .envrc setlocal filetype=sh
 autocmd BufRead,BufNewFile .envrc setlocal syntax=sh
+
+autocmd BufRead,BufNewFile .svm setlocal filetype=svm
+autocmd BufRead,BufNewFile .svm setlocal syntax=svm
+
+let g:go_version_warning = 0
+let g:vim_isort_python_version = 'python3'
+
+augroup autoformat_settings
+    " autocmd FileType bzl AutoFormatBuffer buildifier
+    " autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+    " autocmd FileType dart AutoFormatBuffer dartfmt
+    " autocmd FileType go AutoFormatBuffer gofmt
+    " autocmd FileType gn AutoFormatBuffer gn
+    " autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+    autocmd FileType java AutoFormatBuffer google-java-format
+    autocmd FileType python AutoFormatBuffer yapf3
+    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+    " autocmd FileType vue AutoFormatBuffer prettier
+augroup END
+
+" 'autoformat' package settings
+" autocmd BufWrite * :Autoformat
+" let g:formatter_yapf_style = 'pep8'
+augroup fmt
+    autocmd!
+    autocmd BufWritePre *.py undojoin | Neoformat! python black
+augroup END
+
+" autocmd BufWritePost *.xml %!xmllint --format --recover - 2>/dev/null
+" autocmd Filetype ruby call SetRubyOptions()
+function TidyXML()
+    %!tidy -xml -q --show-errors 0 --show-warnings 0 --indent-attributes 1 -indent --indent-spaces 4
+endfunction
+" autocmd BufWritePost *.xml %!tidy -xml -q --show-errors 0 --show-warnings 0 --indent-attributes 1 -indent --indent-spaces 4
+autocmd BufWritePost *.xml call TidyXML()
+
+" source ~/.vim/bundle/setcolors/plugin/setcolors.vim
+" let g:gitgutter_set_sign_backgrounds = 0
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=yellow
+" call gitgutter#highlight#define_highlights()
+" colorscheme Backupslate2
