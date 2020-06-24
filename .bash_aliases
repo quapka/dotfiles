@@ -11,6 +11,9 @@ alias v='vim'
 # clear shortcut
 alias cl=clear
 
+# what is even Python2?
+alias python=python3
+
 # dotfiles
 alias dots="cd ~/projects/dotfiles && ls -a"
 # source https://stackoverflow.com/a/34432985/2377489
