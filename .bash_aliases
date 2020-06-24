@@ -20,7 +20,7 @@ alias dots="cd ~/projects/dotfiles && ls -a"
 type nvim >/dev/null 2>&1 && alias vim="$(which nvim)"
 
 alias cd..="cd .."
-alias gp="java -jar /home/qup/projects/fi/crocs/GlobalPlatformPro/gp.jar"
+alias gp="java -jar /home/qup/projects/fi/crocs/GlobalPlatformPro/tool/target/gp.jar"
 alias sc="java -jar /home/qup/bin/apdu4j.jar"
 source ~/projects/dotfiles/.bash_aliases.custom
 
