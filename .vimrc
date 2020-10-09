@@ -1,194 +1,75 @@
-set runtimepath+=~/.nvim/after
-" source vundle
-source ~/.vundle_conf.vim
-" colors and syntax highlight
-" so ~/.syntax.vim
-set tags=./._tags;
+" Movement definitions
+" exit Insert mode by pressing 'jk'
+imap jk <Esc>
 
-set encoding=utf-8 " the encoding displayed
-set fileencoding=utf-8 " the encoding written to file
-
-
-" syntax enable
-" set background=dark
-" colorscheme solarized
-
-" highlightning files
-" filetype plugin on
-
-" indentation
-" set tabstop=4
-set expandtab
-set shiftwidth=4
-set softtabstop=4
-" enable mouse
-set mouse=a
-
-filetype indent on
-set smartindent
-autocmd BufRead,BufWritePre *.dot normal gg=G
-
+" Managing splits
 set splitright " open new window on the right v-split
 set splitbelow " open new window below when h-split
-
-" go to Esc mode on pressing j and k
-imap jk <Esc>
-" and in neovim terminal mode as well
-tnoremap <Esc> <C-\><C-n>
-tnoremap jk <C-\><C-n>
-" nnoremap <silent> <F8> :w<cr>!clear;python %<cr>" run python file
-nnoremap <C-Left> :tabprevious<cr>
-nnoremap <C-Right> :tabnext<cr>
-
-" window minimal height
-" set wh=23
-set wmh=0
-" moving between splits, there is also <C-W>_
+" move between splits with Ctrl + hjkl
 map <C-J> <C-W>j
 map <C-K> <C-W>k
-
-" window minimal width
-set wmw=0
-" moving between splits
 map <C-H> <C-W>h
 map <C-L> <C-W>l
-
-" match extra white space
-highlight ExtraWhitespace ctermbg=blue guibg=blue
-match ExtraWhitespace /\s\+$\n/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+a$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-" EXAMPLE extra white space
-
-" playing with higlightning tabs
-" set list
-" set listchars=tab:>·
-"hi GroupA ctermbg=blue ctermfg=black
-"hi GroupB ctermbg=gray ctermfg=black
-"match GroupA / \+$/
-"match GroupB /\t/
-" hi TabularSpace ctermfg=201 ctermbg=0
-" match TabularSpace /\t/
-"something
-"highlight LeadingWhiteSpace ctermbg=blue ctermfg=red
-"match LeadingWhiteSpace /^ \+/
-
-" highlight leading spaces
-"set listchars=space:·
-"highlight WhiteSpaceMol ctermbg=black ctermfg=black
-"match WhiteSpaceMol /\ /
-highlight LeadingWhiteSpace ctermbg=blue ctermfg=blue
-match LeadingWhiteSpace /^ \+/
-
-" view absolute line numbers
-set number
-" view relative line numbers up/down based on cursor position
-set relativenumber
-
-" automatic highlightning for shpaml files
-" maybe better to be put in different file
-autocmd BufRead,BufNewFile *.shpaml setfiletype htmldjango
-autocmd FileType htmldjango setlocal commentstring=\{#\ %s\ #\}
-
-""" BLOCK
-" https://pastebin.com/f2ee37c92
-" searching for dup lines
-" * and # search for next/previous of selected text when used in visual mode
-xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
-xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
-
-fun! s:VisualSearch()
-    let old = @" | norm! gvy
-    let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
-    let @" = old
-endf
-""" ENDBLOCK
-
-""" BLOCK
-" kudos to https://unix.stackexchange.com/a/104931
-" %F(Full file path)
-" %m(Shows + if modified - if not modifiable)
-" %r(Shows RO if readonly)
-" %<(Truncate here if necessary)
-" \ (Separator)
-" %=(Right align)
-" %l(Line number)
-" %v(Column number)
-" %L(Total number of lines)
-" %p(How far in file we are percentage wise)
-" %%(Percent sign)
-" set statusline=%F%m%r%<\ %=%l,%v\ [%L]\ %p%%
-
-" Change the highlighting so it stands out
-" hi statusline ctermbg=white ctermfg=black
-
-" Make sure it always shows
-set laststatus=2
-""" ENDBLOCK
-
-
-"map switching between tabs
+" move between tabs with F7 and F8
 map <F7> :tabp<CR>
 map <F8> :tabn<CR>
 
-" display current time
-map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+" Split appearance
+set number " view absolute line numbers
+set relativenumber " view relative line numbers up/down based on cursor position
+set tabstop=4 shiftwidth=4 expandtab
 
-" automatic reload of changes in .vimrc upon saving
-" https://superuser.com/questions/132029/how-do-you-reload-your-vimrc-file-without-restarting-vim
-" here
+" Plug
+" Plugins will be downloaded under the specified directory.
+call plug#begin(stdpath('data') . '/plugged')
 
-" colorschema for windows tabs
-" https://stackoverflow.com/questions/7238113/customising-the-colours-of-vims-tab-bar
-" hi TabLineSel ctermbg=blue
-"
-" python and neovim
-" let g:loaded_python_provider=1
-" let g:loaded_python3_provider=1
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-commentary'
+" Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
+Plug 'janko-m/vim-test'
+Plug 'sbdchd/neoformat'
+Plug 'pangloss/vim-javascript'
+Plug 'glench/vim-jinja2-syntax'
+Plug 'valloric/matchtagalways'
+" Plug 'latex-box-team/latex-box'
+Plug 'fisadev/vim-isort'
+Plug 'lervag/vimtex'
+" Python specific
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'vim-scripts/sh.vim'
 
-" setting breakpoints with <leader>b <leader>B
-au FileType python map <silent> <leader>b oimport pudb; pudb.set_trace()<esc>
-au FileType python map <silent> <leader>B Oimport pudb; pudb.set_trace()<esc>
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
 
-autocmd BufRead,BufNewFile *.python setlocal filetype=python
-autocmd BufRead,BufNewFile *.py setfiletype python
+" colors
+set termguicolors
+colorscheme vividchalk
+colorscheme PaperColor
+highlight clear SignColumn
 
-" vim-close tags
-" filenames like *.xml, *.html, *.xhtml, ...
-" Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
-"
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.shpaml'
+" File specific settings
+syntax on
+filetype plugin indent on
 
-" filenames like *.xml, *.xhtml, ...
-" This will make the list of non closing tags self closing in the specified files.
-"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+" " First letter of runner's name must be uppercase
+let test#runners = {'Python': ['pytest']}
+let test#strategy = "neovim"
 
-" integer value [0|1]
-" This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-"
-let g:closetag_emptyTags_caseSensitive = 1
+" " syntastic
+" let g:syntastic_python_checkers = ['flake8', 'pylint']
 
-" Shortcut for closing tags, default is '>'
-"
-let g:closetag_shortcut = '>'
+" neoformat
+augroup fmt
+    autocmd!
+    " autocmd BufWritePre *.py :! isort --atomic %
+    autocmd BufWritePre *.py :Isort
+    autocmd BufWritePre *.py undojoin | Neoformat! python black
+augroup END
 
-" Add > at current position without closing the current tag, default is '<leader>>'
-"
-let g:closetag_close_shortcut = '<leader>>'
-
-" When writing a buffer (no delay).
-call neomake#configure#automake('w')
-" " When writing a buffer (no delay), and on normal mode changes (after 750ms).
-" call neomake#configure#automake('nw', 750)
-" " When reading a buffer (after 1s), and when writing (no delay).
-" call neomake#configure#automake('rw', 1000)
-" " Full config: when writing or reading a buffer, and on changes in insert and
-" " normal mode (after 500ms; no delay when writing).
-" call neomake#configure#automake('nrwi', 500)
-
+" neomake
 call neomake#configure#automake({
             \   'TextChanged': {},
             \   'InsertLeave': {},
@@ -207,64 +88,43 @@ let g:neomake_python_flake8_maker = {
     "     \ '%A%f:%l:%c: %t%n %m,' .
     "     \ '%A%f:%l: %t%n %m,' .
     "     \ '%-G%.%#',
-let g:neomake_python_enabled_makers = ['flake8']
-" When reading a buffer (after 2s), and when writing.
-" call neomake#configure#automake('rw', 1000)
+let g:neomake_python_enabled_makers = ['flake8', 'mypy']
+" When writing a buffer (no delay).
 
-" vim-airline settings
-autocmd User AirlineToggledOn call SetStatus()
-function! SetStatus()
-    if ( &ft == 'py' || &ft == 'python')
-        set colorcolumn=10
-        " let g:airline_section_x = 'something'
-    endif
-endfunction
+" Python specifics
+" set a breakpoint
+au FileType python map <silent> <leader>b oimport pudb; pudb.set_trace()<esc>
+au FileType python map <silent> <leader>B Oimport pudb; pudb.set_trace()<esc>
+autocmd BufRead,BufNewFile *.python setlocal filetype=python
+autocmd BufRead,BufNewFile *.py setfiletype python
 
-" direnv uses .envrc files
-autocmd BufRead,BufNewFile .envrc setlocal filetype=sh
-autocmd BufRead,BufNewFile .envrc setlocal syntax=sh
-
-autocmd BufRead,BufNewFile .svm setlocal filetype=svm
-autocmd BufRead,BufNewFile .svm setlocal syntax=svm
-
-let g:go_version_warning = 0
-let g:vim_isort_python_version = 'python3'
-
-augroup autoformat_settings
-    " autocmd FileType bzl AutoFormatBuffer buildifier
-    " autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
-    " autocmd FileType dart AutoFormatBuffer dartfmt
-    " autocmd FileType go AutoFormatBuffer gofmt
-    " autocmd FileType gn AutoFormatBuffer gn
-    " autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-    autocmd FileType java AutoFormatBuffer google-java-format
-    autocmd FileType python AutoFormatBuffer yapf3
-    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-    " autocmd FileType vue AutoFormatBuffer prettier
-augroup END
-
-" 'autoformat' package settings
-" autocmd BufWrite * :Autoformat
-" let g:formatter_yapf_style = 'pep8'
-augroup fmt
-    autocmd!
-    autocmd BufWritePre *.py undojoin | Neoformat! python black
-augroup END
-
-" autocmd BufWritePost *.xml %!xmllint --format --recover - 2>/dev/null
-" autocmd Filetype ruby call SetRubyOptions()
-function TidyXML()
-    %!tidy -xml -q --show-errors 0 --show-warnings 0 --indent-attributes 1 -indent --indent-spaces 4
-endfunction
-" autocmd BufWritePost *.xml %!tidy -xml -q --show-errors 0 --show-warnings 0 --indent-attributes 1 -indent --indent-spaces 4
-autocmd BufWritePost *.xml call TidyXML()
-
-" source ~/.vim/bundle/setcolors/plugin/setcolors.vim
-" let g:gitgutter_set_sign_backgrounds = 0
-highlight clear SignColumn
+" HTML specifics
+autocmd FileType html setlocal shiftwidth=4 softtabstop=4 expandtab
+" Plug additional settings
+" Jinja2
+autocmd BufRead,BufNewFile *.j2 setfiletype jinja
+autocmd FileType jinja setlocal commentstring={#\ %s\ #}
+" vim-gitgutter
 highlight GitGutterAdd ctermfg=green
 highlight GitGutterChange ctermfg=yellow
 highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=yellow
-" call gitgutter#highlight#define_highlights()
-" colorscheme Backupslate2
+filetype plugin on
+
+" Haskell
+" opening *.hs files can be slow due to stack doing something
+" let g:neomake_haskell_enabled_makers = []
+
+""" BLOCK
+" https://pastebin.com/f2ee37c92
+" searching for dup lines
+" * and # search for next/previous of selected text when used in visual mode
+xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
+xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
+
+fun! s:VisualSearch()
+    let old = @" | norm! gvy
+    let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
+    let @" = old
+endf
+""" ENDBLOCK
