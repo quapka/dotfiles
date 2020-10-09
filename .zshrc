@@ -164,3 +164,6 @@ export GP_PATH="$HOME/projects/fi/crocs/GlobalPlatformPro/gp.jar"
 eval "$(pipenv --completion)"
 autoload -Uz compinit && compinit
 
+export MANPATH="$MANPATH:/usr/local/texlive/2020/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2020/texmf-dist/doc/info"
+export PATH="$PATH:/usr/local/texlive/2020/bin/x86_64-linux"
