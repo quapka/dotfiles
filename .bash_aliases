@@ -8,6 +8,7 @@ alias p3django='source ~/Development/Python/envs/p3django/bin/activate'
 alias vim='/usr/local/bin/nvim'
 alias oldvim='/usr/bin/vim'
 alias v='vim'
+alias vi='vim'
 # clear shortcut
 alias cl=clear
 
@@ -20,15 +21,13 @@ alias dots="cd ~/projects/dotfiles && ls -a"
 type nvim >/dev/null 2>&1 && alias vim="$(which nvim)"
 
 alias cd..="cd .."
-alias gp="java -jar /home/qup/projects/fi/crocs/GlobalPlatformPro/tool/target/gp.jar"
-alias sc="java -jar /home/qup/bin/apdu4j.jar"
+alias gp="java -jar /home/qup/projects/fi/thesis/submodules/GlobalPlatformPro/tool/target/gp.jar"
+alias sc="java -jar /home/qup/projects/apdu4j/tool/target/apdu4j.jar"
 source ~/projects/dotfiles/.bash_aliases.custom
 
 alias th="cd ~/projects/fi/thesis"
 alias tt="cd ~/projects/fi/thesis-text"
 alias rec=record
-alias tmux='direnv exec / tmux'
-
 # Pipenv aliases
 alias pes="pipenv shell"
 alias prp="pipenv run"
