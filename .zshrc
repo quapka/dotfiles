@@ -164,4 +164,3 @@ export GP_PATH="$HOME/projects/fi/crocs/GlobalPlatformPro/gp.jar"
 eval "$(pipenv --completion)"
 autoload -Uz compinit && compinit
 
-eval "$(direnv hook zsh)"
