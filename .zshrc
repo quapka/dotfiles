@@ -160,10 +160,6 @@ export SOFTHSM2_CONF="$HOME/go/src/github.com/quapka/go-analysis/hsm-tokens/soft
 # path to GlobalPlatform executable
 export GP_PATH="$HOME/projects/fi/crocs/GlobalPlatformPro/gp.jar"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-export RBENV_VERSION="2.5.6"
-eval "$(rbenv init -)"
-
 eval "$(pipenv --completion)"
 
 eval "$(direnv hook zsh)"
