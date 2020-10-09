@@ -181,3 +181,8 @@ color_less() {
 }
 
 color_less
+
+if [ "$ASCIINEMA_REC" -eq  1 ]; then
+    echo "setting recording prompt"
+    PS1="$ "
+fi
