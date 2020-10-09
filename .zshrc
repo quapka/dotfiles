@@ -167,3 +167,5 @@ autoload -Uz compinit && compinit
 export MANPATH="$MANPATH:/usr/local/texlive/2020/texmf-dist/doc/man"
 export INFOPATH="$INFOPATH:/usr/local/texlive/2020/texmf-dist/doc/info"
 export PATH="$PATH:/usr/local/texlive/2020/bin/x86_64-linux"
+
+export LC_ALL=en_US.UTF-8
