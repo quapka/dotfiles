@@ -160,6 +160,8 @@ export SOFTHSM2_CONF="$HOME/go/src/github.com/quapka/go-analysis/hsm-tokens/soft
 # path to GlobalPlatform executable
 export GP_PATH="$HOME/projects/fi/crocs/GlobalPlatformPro/gp.jar"
 
+# auto completions
 eval "$(pipenv --completion)"
+autoload -Uz compinit && compinit
 
 eval "$(direnv hook zsh)"
