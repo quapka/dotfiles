@@ -5,6 +5,8 @@ export PATH="$PATH":"$HOME/go/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/projects/fi/thesis/bin"
 
+source ~/.zprofile
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 

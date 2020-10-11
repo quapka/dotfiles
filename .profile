@@ -34,3 +34,5 @@ fi
 export PATH="$PATH":$HOME/netbeans-8.2/bin/
 # start ssh agent
 eval $(ssh-agent -s)
+
+export PATH="$HOME/.cargo/bin:$PATH"
