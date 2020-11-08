@@ -135,3 +135,32 @@ endf
 
 " vimtex
 let g:tex_flavor = 'latex'
+
+" Rust
+let g:rustfmt_autosave = 1
+" Racer
+set hidden
+
+nnoremap <silent><buffer> <Plug>(rust-doc-split)
+        \ :tab split<CR>:call racer#ShowDocumentation(0)<CR>
+
+augroup Racer
+    autocmd!
+    autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
+    " autocmd FileType rust nmap <buffer> gs         <Plug>(rust-def-split)
+    " autocmd FileType rust nmap <buffer> gx         <Plug>(rust-def-vertical)
+    " autocmd FileType rust nmap <buffer> gt         <Plug>(rust-def-tab)
+    autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc-split)
+    " autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
+augroup END
+
+" nnoremap <silent><buffer> <Plug>(rust-def)
+"         \ :call racer#GoToDefinition()<CR>
+" nnoremap <silent><buffer> <Plug>(rust-def-split)
+"         \ :split<CR>:call racer#GoToDefinition()<CR>
+" nnoremap <silent><buffer> <Plug>(rust-def-vertical)
+"         \ :vsplit<CR>:call racer#GoToDefinition()<CR>
+" nnoremap <silent><buffer> <Plug>(rust-def-tab)
+"         \ :tab split<CR>:call racer#GoToDefinition()<CR>
+" nnoremap <silent><buffer> <Plug>(rust-doc-tab)
+"         \ :call racer#ShowDocumentation(1)<CR>
