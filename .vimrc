@@ -132,3 +132,6 @@ fun! s:VisualSearch()
     let @" = old
 endf
 """ ENDBLOCK
+
+" vimtex
+let g:tex_flavor = 'latex'
