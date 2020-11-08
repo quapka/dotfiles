@@ -41,6 +41,8 @@ Plug 'vim-scripts/sh.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 
+Plug 'Chiel92/vim-autoformat'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -56,11 +58,11 @@ filetype plugin indent on
 
 " vim-test
 nmap <silent> <leader>t :TestNearest<CR>
-" " First letter of runner's name must be uppercase
+" First letter of runner's name must be uppercase
 let test#runners = {'Python': ['pytest']}
 let test#strategy = "neovim"
 
-" " syntastic
+" syntastic
 " let g:syntastic_python_checkers = ['flake8', 'pylint']
 
 " neoformat
