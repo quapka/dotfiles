@@ -38,6 +38,8 @@ Plug 'lervag/vimtex'
 " Python specific
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'vim-scripts/sh.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
