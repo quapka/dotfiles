@@ -68,9 +68,9 @@ let test#strategy = "neovim"
 " neoformat
 augroup fmt
     autocmd!
-    " autocmd BufWritePre *.py :! isort --atomic %
+    " FIXME calling twice might not be optimal
     autocmd BufWritePre *.py :Isort
-    autocmd BufWritePre *.py undojoin | Neoformat! python black
+    autocmd BufWritePre *.py :Autoformat
 augroup END
 
 " neomake
