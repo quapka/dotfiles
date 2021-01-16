@@ -25,6 +25,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 " Plug 'scrooloose/syntastic'
 Plug 'neomake/neomake'
 Plug 'janko-m/vim-test'
