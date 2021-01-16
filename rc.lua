@@ -11,6 +11,8 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
+local tw = require("test_widget")
+
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -120,6 +122,12 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+twrun = tw()
+my_imagebox = wibox.widget {
+    image  = "/home/qup/.config/awesome/bat-full.png",
+    resize = true,
+    widget = wibox.widget.imagebox
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -217,6 +225,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            twrun,
+            my_imagebox,
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
