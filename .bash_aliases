@@ -31,3 +31,5 @@ alias rec=record
 # Pipenv aliases
 alias pes="pipenv shell"
 alias prp="pipenv run"
+
+alias virt="source virtual/bin/activate"
