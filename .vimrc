@@ -165,3 +165,12 @@ augroup END
 "         \ :tab split<CR>:call racer#GoToDefinition()<CR>
 " nnoremap <silent><buffer> <Plug>(rust-doc-tab)
 "         \ :call racer#ShowDocumentation(1)<CR>
+" let orange = '#FF8C01'
+" an added line
+highlight GitGutterAdd ctermfg=green
+" a changed line
+highlight GitGutterChange ctermfg=yellow
+" at least one removed line
+highlight GitGutterDelete ctermfg=red
+" a changed line followed by at least one removed line, 12 is light red
+highlight GitGutterChangeDelete ctermfg=red
