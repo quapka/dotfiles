@@ -50,6 +50,8 @@ terminal = "alacritty"
 editor = os.getenv("EDITOR") or "neovim"
 editor_cmd = terminal .. " -e " .. editor
 
+HOME = os.getenv("HOME") or "/home"
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -124,7 +126,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 mytextclock = wibox.widget.textclock()
 twrun = tw()
 my_imagebox = wibox.widget {
-    image  = "/home/qup/.config/awesome/bat-full.png",
+    image  = HOME .. ".config/awesome/bat-full.png",
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -307,6 +309,16 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey,           }, "q",
+                function ()
+                    cmd = {
+                        terminal,
+                        "--class alacritty-quake",
+                        "--config-file " .. HOME .."/.config/alacritty/alacritty-quake.yml",
+                    }
+                    awful.spawn(table.concat(cmd, " "))
+                end,
+              {description = "open a quake like terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -467,7 +479,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
      }
     },
 
@@ -505,6 +517,8 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
+    { rule = { instance = "alacritty-quake" },
+      properties = { floating = true, opacity = 0.5 } },
 }
 -- }}}
 
