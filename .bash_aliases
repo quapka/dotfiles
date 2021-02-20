@@ -33,3 +33,4 @@ alias pes="pipenv shell"
 alias prp="pipenv run"
 
 alias virt="source virtual/bin/activate"
+alias ala="$HOME/.cargo/bin/alacritty"

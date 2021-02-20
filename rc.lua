@@ -46,7 +46,7 @@ end
 beautiful.init("~/.config/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "neovim"
 editor_cmd = terminal .. " -e " .. editor
 
