@@ -44,6 +44,8 @@ Plug 'racer-rust/vim-racer'
 
 Plug 'Chiel92/vim-autoformat'
 
+Plug 'dag/vim-fish'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
